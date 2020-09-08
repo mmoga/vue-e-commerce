@@ -1,7 +1,13 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import VuexPersist from "vuex-persist";
 
 Vue.use(Vuex);
+
+const vuexLocalStorage = new VuexPersist({
+  key: "ecommerce",
+  storage: window.localStorage
+});
 
 const slugify = (str) => {
   str = str || "";
@@ -30,6 +36,7 @@ const slugify = (str) => {
 };
 
 export default new Vuex.Store({
+  plugins: [vuexLocalStorage.plugin],
   state: {
     products: [],
     cart: []
